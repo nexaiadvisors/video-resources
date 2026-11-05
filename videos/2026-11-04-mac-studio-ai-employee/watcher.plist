@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Runs a script every 15 minutes (900 seconds), day and night.
+  1. Replace com.example.watcher and the two paths below.
+  2. Save as ~/Library/LaunchAgents/com.example.watcher.plist
+  3. Load it:   launchctl load ~/Library/LaunchAgents/com.example.watcher.plist
+     Stop it:   launchctl unload ~/Library/LaunchAgents/com.example.watcher.plist
+  Other intervals: 300 = 5 min, 60 = 1 min, 43200 = 12 h.
+  For a fixed time (3:30 every morning), replace StartInterval with:
+    <key>StartCalendarInterval</key><dict><key>Hour</key><integer>3</integer><key>Minute</key><integer>30</integer></dict>
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.example.watcher</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>/Users/YOUR_USER/watcher/run.sh</string>
+  </array>
+  <key>StartInterval</key>
+  <integer>900</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/YOUR_USER/watcher/watcher.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/YOUR_USER/watcher/watcher.err</string>
+</dict>
+</plist>
