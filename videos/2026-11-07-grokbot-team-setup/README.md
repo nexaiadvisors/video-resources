@@ -30,13 +30,13 @@ Not 10. Open a blank doc called "My first 3 bots" and write one line per job: wh
 ### Step 2. Write one rulebook
 One Google Doc, six headings, one page: About the business. What you may do on your own. What needs my yes. Never do. How we write. Who does what.
 - Start from `RULEBOOK-TEMPLATE.md`, or turn your notes into it with **Prompt 2**.
-- Connect Google Drive so the bots can open it: in the Grok app, open Plugins, find Google Drive, click Add, and sign in. If it lets you choose, give it view-only access.
+- Connect Google Drive so the bots can open it: in the Grok app, click the Connect apps icon at the bottom of the sidebar, search Google Drive, click Connect, and sign in. Then open Tools and switch off anything that edits, shares or deletes files.
 
 ### Step 3. Create the bots and set approvals
-- In the Grok app, start a new chat, create a new Bot, and type its name.
-- Paste your setup message (**Prompt 3**) into the chat that opens: the bot's one job, the link to your rulebook, and what needs your yes. The message tells the bot to save it to its own profile. Don't type it into the profile box by hand, because the box may cut it short.
-- Open Settings, then Rules, and set anything that sends a message to Ask first.
-- If your bots don't need your computer, open Settings, then Computer, and pick Never allow.
+- In the Grok app, click the plus button at the top of the sidebar, New Bot, type its name, and click Create.
+- Paste your setup message (**Prompt 3**) into the chat that opens: the bot's one job, the link to your rulebook, and what needs your yes. The message tells the bot to remember it.
+- Set approvals. Open Settings (click your name at the bottom left), then Permissions. Under Always Ask, click Add Rule and type: sending any email or message. These rules cover your whole account, not just one bot.
+- If your bots don't need your computer, open Settings, then Computer, and set Execution on this computer to Never allow.
 - Don't click allow on anything you haven't read. You should know exactly what each bot can touch.
 - Ask for your yes on two things only: messages going out, and money. Let the bots read and draft on their own.
 
@@ -49,13 +49,13 @@ Before you connect your real inbox, send each bot the 5 fake messages in `TEST-M
 Make each bot read back what it saved, so you know it got all of it.
 - Send **Prompt 5**. The bot replies with the number of characters it saved.
 - Paste your setup message into any free character counter website. The two numbers should match.
-- If they don't, send the setup message again and ask the bot to save it word for word.
+- If they don't, send the setup message again and ask the bot to remember it word for word.
 
 ### Step 6. Schedule in business hours
-Grok will let you run a check very often. Don't. Every 2 to 4 hours during business hours is plenty, and each check uses part of your plan.
+Grok will let you run a check every five minutes. Don't. Every 2 to 4 hours during business hours is plenty, and each check uses part of your plan.
 - In the bot's chat, send **Prompt 6**. It checks for new work first and stops with one line when nothing is new.
 - Change the hours and days in the prompt to fit your business.
-- Then click the bot's name, open the Details tab, and make sure the routine is listed.
+- Then click the bot's name, open the Activity tab, and make sure the routine is listed under Upcoming, with its switch on.
 
 ---
 
@@ -64,10 +64,10 @@ Grok will let you run a check very often. Don't. Every 2 to 4 hours during busin
 - [ ] 3 jobs written down, one line each
 - [ ] One-page rulebook in Google Docs, with Google Drive connected
 - [ ] 3 bots created, each with its setup message saved
-- [ ] Sending set to Ask first
+- [ ] An Always Ask rule for sending any email or message
 - [ ] All 5 fake messages pass for each bot
 - [ ] Each bot's read-back number matches your character counter
-- [ ] Each bot has one routine, in business hours, listed on its Details tab
+- [ ] Each bot has one routine, in business hours, listed on its Activity tab
 
 Nothing in this kit changes a setting by itself. Read each file before you use it.
 

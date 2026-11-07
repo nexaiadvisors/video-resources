@@ -5,7 +5,7 @@ Use these in the practice run (step 4) before a bot sees a real customer. Every 
 How to use them:
 1. Open Prompt 4 in `PROMPTS.md`.
 2. Replace each [bracket] with the matching message below. Change the details to fit your business if you like.
-3. Paste the whole thing into the bot's chat. Sending is already set to Ask first, so nothing goes out.
+3. Paste the whole thing into the bot's chat. Sending is already on Always Ask, so nothing goes out.
 4. For each reply, mark one of three things: **right**, **the bot misread**, or **my rulebook was unclear**.
 5. Fix the rulebook and run the 5 messages again. When all 5 come back right, the bot passes.
 
