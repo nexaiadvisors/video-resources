@@ -6,6 +6,7 @@ Browse them on the web at https://www.nexaiadvisors.com/resources
 
 | Date | Video | What you get |
 |---|---|---|
+| 2026-11-07 | [Set Up Your Grok Bot Team in 20 Minutes (No Code)](videos/2026-11-07-grokbot-team-setup/) | Grok Bot team starter kit: one-page rulebook template, 5 fake test messages, all 6 prompts, how-to steps |
 | 2026-11-04 | [I Turned My Mac Studio Into an AI Employee](videos/2026-11-04-mac-studio-ai-employee/) | Always-on Mac starter kit: setup steps, first prompt, 15-minute job template, read-only health check, agent instructions |
 | 2026-11-04 | [Is Your Business Invisible to ChatGPT? (10-Minute Test)](videos/2026-11-04-invisible-to-chatgpt/) | Free AI checker skill, plus the message to send whoever runs your website |
 | 2026-11-01 | [8 Times AI Went Drastically Wrong in 2026 (And How to Protect Yourself)](videos/2026-11-01-8-times-ai-went-wrong/) | Every source shown on screen, by incident |
