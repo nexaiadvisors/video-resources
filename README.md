@@ -20,6 +20,6 @@ Browse them on the web at https://www.nexaiadvisors.com/resources
 
 | Date | Kit | What you get |
 |---|---|---|
-| 2026-11-09 | [Give your AI agent a talking face, for free](kits/2026-11-09-talking-avatar/) | Claude Code skill: one portrait becomes a talking avatar for a voice or chat app, plus a demo |
+| 2026-11-09 | [Give your AI agent a talking face, for free](kits/2026-11-09-talking-avatar/) | Claude Code skill: one portrait becomes a talking avatar (canvas + image edits, no lip-sync model), plus a demo |
 
 Made by David He, [NexAI Advisors](https://www.nexaiadvisors.com). AI systems for small service businesses.
