@@ -15,4 +15,10 @@ Browse them on the web at https://www.nexaiadvisors.com/resources
 | 2026-10-26 | [Muse vs Dots vs Grok Bot vs Instinct (Real Business Test)](videos/2026-10-26-four-ai-agents-test/) | The exact 9 test prompts and the full scorecard |
 | 2026-07-06 | [I Spent $15,000 Token Maxing Claude Code (Was It Worth It?)](videos/2026-07-06-token-maxing-claude-code/) | Agent spend starter kit: dollar caps, stop hook, bash guard, model routing, goal-loop skill |
 
+## Kits (no video)
+
+| Date | Kit | What you get |
+|---|---|---|
+| 2026-11-09 | [Give your AI agent a talking face, for free](kits/2026-11-09-talking-avatar/) | Claude Code skill: one portrait becomes a talking avatar for a voice or chat app, plus a demo |
+
 Made by David He, [NexAI Advisors](https://www.nexaiadvisors.com). AI systems for small service businesses.
