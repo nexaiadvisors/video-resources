@@ -36,24 +36,49 @@ the video it comes from. Then give me a revised version under [N] words.
 
 Run Prompt 2 again on each revision until it stops finding real problems.
 
+## Connect NotebookLM to your AI agent
+
+NotebookLM has no official connector, so this uses a free open-source one, [notebooklm-mcp-cli](https://github.com/jacob-bd/gemini-notebook-mcp-cli) (MIT license). It gives you a command-line tool called `nlm` and an MCP server. An MCP server is a plug-in that lets an AI agent such as Claude Code, Cursor or Claude Desktop use another app. Once it's connected, your agent can list your notebooks, add videos and ask questions for you.
+
+**Easiest way: paste this to your agent** (Claude Code, Cursor, or any agent that can run terminal commands):
+
+```
+Connect NotebookLM to yourself for me.
+1. Install the tool: run `uv tool install notebooklm-mcp-cli`. If uv isn't installed, use
+   `pipx install notebooklm-mcp-cli` instead. It needs Python 3.11 or newer.
+2. Run `nlm login`. It opens Chrome so I can sign in to my Google account. Wait for me.
+3. Run `nlm setup add claude-code` (or cursor, claude-desktop, windsurf, gemini; use the one
+   you are), so the NotebookLM MCP server is added to your config.
+4. Run `nlm notebook list` and show me my notebooks, so we know it works.
+5. Tell me if I need to restart you to load the new MCP server.
+```
+
+**Or do it yourself in a terminal:**
+
+1. `uv tool install notebooklm-mcp-cli` (or `pipx install notebooklm-mcp-cli`)
+2. `nlm login` and sign in with Google in the window that opens
+3. `nlm setup add claude-code` (run `nlm setup list` to see every supported app)
+4. `nlm notebook list` to check it works, then restart your agent
+
+Good to know: the tool signs in through your own browser session, the same way you use notebooklm.google.com. It stores that sign-in on your computer only. It isn't an official Google API, so it can break when Google changes the site; `uv tool upgrade notebooklm-mcp-cli` usually fixes it. If it says you're signed out, run `nlm login` again.
+
 ## Claude Code version (the `ask-expert` skill)
 
 The skill picks the right `YT:` notebook for your question, checks it has recent videos on that subject, adds new ones if not, asks it, and answers with linked sources.
 
 Setup (about 10 minutes):
 
-1. Install the NotebookLM CLI: `uv tool install notebooklm-mcp-cli` (or `pipx install notebooklm-mcp-cli`).
-2. Sign in: `nlm login`. It opens a browser for your Google account.
-3. Create at least one notebook named `YT: <Topic>` and add videos (in NotebookLM, or `nlm source add <notebook-id> --youtube <url>`).
-4. Copy the [`skill/ask-expert`](skill/ask-expert/) folder into `~/.claude/skills/` (or your agent's skills folder).
-5. Optional: set `YOUTUBE_API_KEY` (a free YouTube Data API key) so the freshness check is fast. Without it the script uses `yt-dlp`.
-6. Ask: `/ask-expert what makes a cold follow-up email to contractors get a reply?`
+1. Connect NotebookLM as in the section above.
+2. Create at least one notebook named `YT: <Topic>` and add videos (in NotebookLM, or `nlm source add <notebook-id> --youtube <url>`).
+3. Copy the [`skill/ask-expert`](skill/ask-expert/) folder into `~/.claude/skills/` (or your agent's skills folder).
+4. Optional: set `YOUTUBE_API_KEY` (a free YouTube Data API key) so the freshness check is fast. Without it the script uses `yt-dlp`.
+5. Ask: `/ask-expert what makes a cold follow-up email to contractors get a reply?`
 
 Files:
 - [`SKILL.md`](skill/ask-expert/SKILL.md): the five steps, each with a check, plus the outreach loop
 - [`scripts/freshness.py`](skill/ask-expert/scripts/freshness.py): lists a notebook's videos by upload date and creator; reads only, never changes the notebook
 
-Honest limits: NotebookLM only knows what you put in the notebook, so pick creators who have done the work. It summarizes; it can still miss nuance, so open the cited video when a point matters. `nlm` uses NotebookLM's web session, not an official API, so it can break when Google changes things.
+Honest limits: NotebookLM only knows what you put in the notebook, so pick creators who have done the work. It summarizes; it can still miss nuance, so open the cited video when a point matters.
 
 ---
 More videos and resources: https://www.nexaiadvisors.com/resources
