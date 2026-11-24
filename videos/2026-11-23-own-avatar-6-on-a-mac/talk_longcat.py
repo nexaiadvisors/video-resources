@@ -11,6 +11,7 @@ PROMPT.txt: describe the person and setting, then how they talk. Mark where the 
   Normal segments use the resting text. A gesture segment uses the cue's gesture sentence in that place.
 CUES.txt: one cue per line, `phrase | gesture sentence`. The phrase is matched in the spoken words, in order.
   `@7.4 | gesture sentence` gives a time in seconds instead of a phrase.
+  Add `| seed=7` to a line to render that one gesture with its own seed (hand shapes depend on the seed).
 
 Why it works this way: a video model performs a prompted action at the START of a generation. A gesture prompt on a
 segment that continues earlier frames is ignored. A segment started fresh from one still frame obeys it, and the
@@ -59,7 +60,7 @@ def norm(word):
 def cue_frames(cues, words, lead, total):
     """Each cue -> the frame where its gesture segment starts (phrase start minus `lead` seconds)."""
     toks, out, i0 = [norm(w["w"]) for w in words], [], 0
-    for phrase, gesture in cues:
+    for phrase, gesture, seed in cues:
         if phrase.startswith("@"):
             t = float(phrase[1:])
         else:
@@ -69,9 +70,9 @@ def cue_frames(cues, words, lead, total):
                 sys.exit(f'cue phrase "{phrase}" not found in the voice after word {i0}. Spoken: '
                          + " ".join(w["w"] for w in words))
             t, i0 = words[hit]["s"] - lead, hit + len(want)
-        out.append((max(0, round(t * FPS)), phrase, gesture))
+        out.append((max(0, round(t * FPS)), phrase, gesture, seed))
     prev = None
-    for nb, phrase, _ in out:
+    for nb, phrase, *_ in out:
         if prev is None and nb < MIN_GAP:
             sys.exit(f'cue "{phrase}" at {nb / FPS:.2f}s is too close to the start (needs {MIN_GAP / FPS:.1f}s of talking first)')
         if prev is not None and nb - prev < MIN_GESTURE:
@@ -112,43 +113,46 @@ def main():
     cues = []
     if a.cues:
         lines = [l.strip() for l in pathlib.Path(a.cues).read_text().splitlines() if l.strip() and not l.startswith("#")]
-        cues = [tuple(x.strip() for x in l.split("|", 1)) for l in lines]
+        for l in lines:
+            parts = [x.strip() for x in l.split("|")]
+            seed = next((int(x[5:]) for x in parts[2:] if x.startswith("seed=")), None)
+            cues.append((parts[0], parts[1], seed))
     words = []
-    if any(not p.startswith("@") for p, _ in cues):
+    if any(not c[0].startswith("@") for c in cues):
         env = dict(os.environ)
         run(["uv", "run", "-q", "--with", "mlx-whisper", "python", HERE / "word_times.py", voice, W / "words.json"],
             log=W / "words.log", env=env)
         words = json.loads((W / "words.json").read_text())["words"]
     placed = cue_frames(cues, words, a.lead, total)
-    for nb, phrase, _ in placed:
+    for nb, phrase, *_ in placed:
         note(f'cue "{phrase}": gesture segment starts at {nb / FPS:.2f}s (frame {nb})')
 
     # Plan: (kind, first frame, frames to render, frames to keep, prompt). A part that is followed by a gesture renders
     # one extra frame: that frame is the still the gesture segment starts from. A gesture segment is cut short when
     # the next cue comes before its 93 frames end; the next gesture then starts from its frame at that cue.
     plan, c = [], 0
-    for j, (nb, _, g) in enumerate(placed):
+    for j, (nb, _, g, cseed) in enumerate(placed):
         if nb > c or not plan:
-            plan.append(("talk", c, nb - c + 1, nb - c, rest_prompt))
+            plan.append(("talk", c, nb - c + 1, nb - c, rest_prompt, None))
         nxt = placed[j + 1][0] if j + 1 < len(placed) else None
         n = min(SEG, total - nb)
         if nxt is not None and nxt - nb < SEG:
-            plan.append(("gesture", nb, nxt - nb + 1, nxt - nb, gesture_prompt(g)))
+            plan.append(("gesture", nb, nxt - nb + 1, nxt - nb, gesture_prompt(g), cseed))
             c = nxt
         else:
-            plan.append(("gesture", nb, n, n, gesture_prompt(g)))
+            plan.append(("gesture", nb, n, n, gesture_prompt(g), cseed))
             c = nb + n
     if c < total:
-        plan.append(("talk", c, total - c, total - c, rest_prompt))
+        plan.append(("talk", c, total - c, total - c, rest_prompt, None))
 
     size, prev, parts = a.size, None, []
-    for i, (kind, first, n, keep, prompt) in enumerate(plan):
+    for i, (kind, first, n, keep, prompt, pseed) in enumerate(plan):
         p = W / f"p{i}-{kind}.mp4"
         (W / f"p{i}.txt").write_text(prompt)
         aud = W / f"p{i}.wav"
         run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{first / FPS:.3f}", "-i", W / "voice.wav", "-c:a", "pcm_s16le", aud])
         cmd = [CODE / ".venv/bin/python", "scripts/generate.py", "--weights", WEIGHTS, "--audio", aud, "--prompt", W / f"p{i}.txt",
-               "--duration", f"{n / FPS:.3f}", "--seed", a.seed, "--resolution", a.resolution, "--out", p]
+               "--duration", f"{n / FPS:.3f}", "--seed", a.seed if pseed is None else pseed, "--resolution", a.resolution, "--out", p]
         if size:
             cmd += ["--size", size]
         if kind == "gesture":             # fresh start from the single frame at the cue
