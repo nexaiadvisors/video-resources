@@ -18,6 +18,8 @@ line per gesture.
 6. Read the cue list back (phrase and gesture) before rendering. A render is slow, so catch mistakes on paper.
 7. After rendering, make a frame sheet (5 frames per second) around each cue and check the hand shape. A wrong finger
    count is fixed by re-rendering that one segment with another seed.
+8. Check the face as well as the hand. A gesture segment starts fresh from one frame, and the expression can
+   overshoot: a two-finger test on 2026-11-23 came out with an exaggerated smile. Re-render with another seed.
 
 ## How to write the gesture sentence
 
@@ -39,7 +41,7 @@ seeds. **Untested** means the sentence follows the tested pattern but has not be
 |---|---|---|---|
 | Personal admission, sincerity | "I have", "honestly", "I believe", "for me", "I care", "from my experience" | He raises his right hand and places his open palm flat on the centre of his chest, holds it there for a moment, then lowers it back to his lap. | Tested |
 | List item 1 | "first", "number one", "one reason", "the first thing" | He raises his right hand and points his index finger straight up to show the number one. Only one finger is extended; his other fingers are curled into a fist. He holds it for a moment, then lowers his hand back to his lap. | Tested, seed-sensitive (seed 7 gave one finger, seed 42 gave two) |
-| List item 2 | "second", "number two", "two things" | He raises his right hand and holds up two fingers, his index and middle finger, with his palm facing the camera and his other fingers closed. He holds it for a moment, then lowers his hand back to his lap. | Rendered 2026-11-23, seed-sensitive (clean with seed 42, one finger with seed 7; it drifts to one finger after about 2 s) |
+| List item 2 | "second", "number two", "two things" | He raises his right hand and holds up two fingers, his index and middle finger, with his palm facing the camera and his other fingers closed. He holds it for a moment, then lowers his hand back to his lap. | Rendered 2026-11-23, seed-sensitive (clean with seed 42, one finger with seed 7; it drifts to one finger after about 2 s). The clean render had an exaggerated smile, and the three-finger result did not read as a natural three: do not use two or three in a deliverable yet |
 | List item 3 | "third", "and third", "number three", "three reasons" | He raises his right hand and counts three on his fingers, holding up his thumb, index finger and middle finger with the other two fingers closed. He holds it for a moment, then lowers his hand back to his lap. | Rendered 2026-11-23, unreliable: this thumb-index-middle wording gave three in 1 of 3 seeds. Index-middle-ring wording gave 0 of 5 (two fingers, an OK sign, and once on-screen text). Always check the frames |
 | Announcing a count | "three things", "two options", "five steps" | The same finger shape as the number said. | Untested |
 | Precision, the key detail | "exactly", "the key point", "one detail", "specifically" | He raises his right hand with his thumb and index fingertip pressed together in a small pinch, gives one short downward tap in the air, then lowers his hand back to his lap. | Untested |
