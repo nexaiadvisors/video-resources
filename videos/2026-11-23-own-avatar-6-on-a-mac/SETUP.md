@@ -51,4 +51,6 @@ The model's output is small. We used the RelayVSR upscaler at 4x to reach 2560x1
 
 - 592x480: about 45 seconds of compute per second of video, about 47 GB peak memory.
 - A 23 second clip with one gesture: about 18 minutes.
+- A 23 second widescreen clip (864x480) with two gestures: 1,867 seconds (about 31 minutes), 50.5 GB peak memory.
+- All times are on a Mac Studio with an M5 Ultra and 256 GB of memory.
 - Rendering HD directly (1280x720) failed twice on our machine after the first segment. Render small and upscale.

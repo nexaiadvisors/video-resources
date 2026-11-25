@@ -1,6 +1,6 @@
 # I Built My Own HeyGen Avatar 6 on a Mac (Free Code)
 
-Watch: https://www.youtube.com/watch?v=<id>
+Watch: (link added when the video is public)
 
 **What you get:** the script that makes a talking avatar from one photo and one voice file on your own Mac, and places hand gestures on the exact words you choose. Plus the gesture list, example prompts and setup notes.
 
@@ -19,11 +19,18 @@ Watch: https://www.youtube.com/watch?v=<id>
 
 A video model does what you ask at the **start** of what it is generating. It does not wait for a word. So to make a gesture land on a word, do not ask harder. Start a new piece of video just before the word, from a single still frame, with the gesture in the prompt.
 
-## What it costs to run
+## What you need, and what it costs to run
 
-- A Mac with Apple silicon and 64 GB of memory or more. The model peaked at about 47 GB in our runs.
-- About 45 seconds of compute for each second of video at 592x480.
+- **Minimum:** a Mac with Apple silicon and 64 GB of memory. The model peaked at about 47 GB at 592x480 and about
+  50 GB at widescreen 864x480 in our runs, so a 32 GB Mac is not enough today.
+- **What we used:** a Mac Studio with an M5 Ultra and 256 GB of memory. A smaller chip should work, just slower; we
+  have not timed one.
+- **Speed on our Mac:** about 45 seconds of compute for each second of video at 592x480. A 23 second widescreen clip
+  with two gestures took about 31 minutes, before the upscale.
 - No per-minute fee. The voice is separate: bring any audio file.
+
+**Under 64 GB?** Keep this kit anyway. Open video models keep getting smaller and faster, and a model that needs our
+machine today may run on yours in a few months.
 
 ## What does not work yet
 

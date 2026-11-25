@@ -6,6 +6,7 @@ Browse them on the web at https://www.nexaiadvisors.com/resources
 
 | Date | Video | What you get |
 |---|---|---|
+| 2026-11-23 | [I Built My Own HeyGen Avatar 6 on a Mac (Free Code)](videos/2026-11-23-own-avatar-6-on-a-mac/) | Talking-avatar script with gestures on chosen words, gesture list, prompts, setup notes, agent instructions |
 | 2026-11-09 | [From Puppet to Swimmer: My AI Mermaid in 5 Steps](videos/2026-11-09-mermaid-moment/) | One-page checklist for making something new with AI, plus the copy-paste prompt |
 | 2026-11-04 | [I Turned My Mac Studio Into an AI Employee](videos/2026-11-04-mac-studio-ai-employee/) | Always-on Mac starter kit: setup steps, first prompt, 15-minute job template, read-only health check, agent instructions |
 | 2026-11-04 | [Is Your Business Invisible to ChatGPT? (10-Minute Test)](videos/2026-11-04-invisible-to-chatgpt/) | Free AI checker skill, plus the message to send whoever runs your website |
