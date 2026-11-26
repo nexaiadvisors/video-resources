@@ -1,6 +1,6 @@
 # I Built My Own HeyGen Avatar 6 on a Mac (Free Code)
 
-Watch: (link added when the video is public)
+Watch: https://www.youtube.com/watch?v=OgXIeuSdh3Q
 
 **What you get:** the script that makes a talking avatar from one photo and one voice file on your own Mac, and places hand gestures on the exact words you choose. Plus the gesture list, example prompts and setup notes.
 
